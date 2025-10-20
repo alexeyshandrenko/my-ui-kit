@@ -1,1 +1,2 @@
-export { default } from './components';
+import './styles/index.scss';
+export { Input } from './components';

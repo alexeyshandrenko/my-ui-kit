@@ -2,15 +2,20 @@
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-  color: $color-primary;
+  color: $text-primary;
 }
 
 .wrapper {
   padding: 12px;
+  border: 1px solid black;
   border-color: $color-border;
   border-radius: 10px;
+
+  @include respond(tablet) {
+    border-radius: 0;
+  }
 }
 
 .error {
-  color: $color-error;
+  color: $text-error;
 }

@@ -1,5 +1,4 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
 
 import js from "@eslint/js";
 import eslintPluginPrettier from "eslint-plugin-prettier";
@@ -21,9 +20,12 @@ export default defineConfig([
       "prettier/prettier": [
         "error",
         {
-          semi: true,
+          endOfLine: "auto",
+          useTabs: false,
           singleQuote: true,
-          printWidth: 120,
+          jsxSingleQuote: true,
+          printWidth: 80,
+          arrowParens: "always",
           tabWidth: 2,
           trailingComma: "es5",
         },

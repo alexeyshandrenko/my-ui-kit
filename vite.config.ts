@@ -2,13 +2,14 @@
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 
-// https://vite.dev/config/
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-const dirname = typeof __dirname === 'undefined' ? path.dirname(fileURLToPath(import.meta.url)) : __dirname;
+const dirname =
+  typeof __dirname === 'undefined'
+    ? path.dirname(fileURLToPath(import.meta.url))
+    : __dirname;
 
-// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [react()],
   test: {
@@ -16,8 +17,6 @@ export default defineConfig({
       {
         extends: true,
         plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
           storybookTest({
             configDir: path.join(dirname, '.storybook'),
           }),
@@ -39,6 +38,23 @@ export default defineConfig({
       },
     ],
   },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'MyUiKit',
+      fileName: (format) => `my-ui-kit.${format}.js`,
+      formats: ['es', 'cjs'],
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -47,9 +63,18 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `
-          @import "@/styles/index";
-        `,
+        additionalData: (content, loaderContext) => {
+          const filePath = loaderContext;
+          if (
+            filePath.includes('src/styles/index.scss') ||
+            filePath.includes('src/styles/mixins.csss') ||
+            filePath.includes('src/styles/reset.csss') ||
+            filePath.includes('src/styles/variables.csss')
+          ) {
+            return content;
+          }
+          return '@import "@/styles/index"';
+        },
       },
     },
   },

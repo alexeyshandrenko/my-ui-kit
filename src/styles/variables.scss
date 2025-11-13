@@ -1,9 +1,19 @@
-$text-primary: #0a0a0a;
-$text-inverted: #fff;
-$text-secondary: #a3a3a3;
-$text-success: #10b981;
-$text-warning: #f59e0b;
-$text-error: #ef4444;
-$color-bg: #fff;
-$color-border: #0a0a0a;
-$color-border-hover: #a3a3a3;
+// Текст
+$color-text: #0a0a0a;
+$color-placeholder: #a3a3a3;
+$color-disabled: #9ca3af;
+$color-error: #ef4444;
+
+// Фон
+$bg-default: #fff;
+$input-filled-bg: #f9fafb; // light gray background for filled input
+$input-filled-bg-hover: #f3f4f6;
+$bg-hover: #fafafa;
+$bg-focus: #fff;
+$bg-disabled: #f3f4f6;
+
+// Границы
+$border-color: #d1d5db;
+$border-hover: #9ca3af;
+$border-focus: #279af1;
+$border-error: #ef4444;

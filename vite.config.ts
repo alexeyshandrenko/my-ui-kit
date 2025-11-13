@@ -69,7 +69,8 @@ export default defineConfig({
             filePath.includes('src/styles/index.scss') ||
             filePath.includes('src/styles/mixins.csss') ||
             filePath.includes('src/styles/reset.csss') ||
-            filePath.includes('src/styles/variables.csss')
+            filePath.includes('src/styles/variables.csss') ||
+            filePath.includes('src/styles/globals.csss')
           ) {
             return content;
           }

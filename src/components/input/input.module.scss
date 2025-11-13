@@ -1,21 +1,121 @@
-.container {
+.wrapper {
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-  color: $text-primary;
-}
+  font-family: inherit;
 
-.wrapper {
-  padding: 12px;
-  border: 1px solid black;
-  border-color: $color-border;
-  border-radius: 10px;
-
-  @include respond(tablet) {
-    border-radius: 0;
+  .label {
+    width: fit-content;
+    font-weight: 400;
+    color: $color-text;
   }
-}
 
-.error {
-  color: $text-error;
+  .input {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 6px;
+
+    color: $color-text;
+
+    background-color: $bg-default;
+    outline: none;
+
+    &::placeholder {
+      color: $color-placeholder;
+    }
+
+    &:disabled {
+      color: $color-disabled;
+      background-color: $bg-disabled;
+    }
+
+    &.large {
+      height: 40px;
+      font-size: 16px;
+    }
+
+    &.default {
+      height: 32px;
+      font-size: 14px;
+    }
+
+    &.small {
+      height: 24px;
+      font-size: 12px;
+    }
+
+    &.outlined {
+      border: 1px solid $border-color;
+
+      &:hover {
+        border: 1px solid $border-hover;
+      }
+
+      &:focus,
+      &:focus-visible {
+        border: 1px solid $border-focus;
+      }
+    }
+
+    &.borderless {
+      border: none;
+    }
+
+    &.underlined {
+      border-bottom: 1px solid $border-color;
+      border-radius: 0;
+
+      &:hover {
+        border-bottom: 1px solid $border-hover;
+      }
+
+      &:focus,
+      &:focus-visible {
+        border-bottom: 1px solid $border-focus;
+      }
+    }
+
+    &.filled {
+      background-color: $input-filled-bg;
+
+      &:hover {
+        background-color: $input-filled-bg-hover;
+      }
+
+      &:focus,
+      &:focus-visible {
+        border: 1px solid $border-focus;
+        background-color: $bg-default;
+      }
+    }
+  }
+
+  .error {
+    font-weight: 400;
+    color: $border-error;
+  }
+
+  &:has(.input.small) .label {
+    font-size: 12px;
+  }
+
+  &:has(.input.default) .label {
+    font-size: 14px;
+  }
+
+  &:has(.input.large) .label {
+    font-size: 16px;
+  }
+
+  &:has(.input.small) .error {
+    font-size: 12px;
+  }
+
+  &:has(.input.default) .error {
+    font-size: 14px;
+  }
+
+  &:has(.input.large) .error {
+    font-size: 16px;
+  }
 }

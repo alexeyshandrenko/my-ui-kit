@@ -1,6 +1,7 @@
 /// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import path from 'node:path';
@@ -11,7 +12,7 @@ const dirname =
     : __dirname;
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   test: {
     projects: [
       {
@@ -58,6 +59,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, './src/assets'),
     },
   },
   css: {

@@ -1,2 +1,2 @@
 import './styles/index.scss';
-export { Input } from './components';
+export { IconButton, Input } from './components';

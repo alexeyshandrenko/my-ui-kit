@@ -40,7 +40,17 @@ export const Error: Story = {
   args: {
     label: 'Label',
     placeholder: 'Label',
+    variant: 'underlined',
+    error: 'Error',
+  },
+};
+
+export const Password: Story = {
+  args: {
+    label: 'Password',
+    placeholder: 'Password',
     variant: 'outlined',
     error: 'Error',
+    type: 'password',
   },
 };

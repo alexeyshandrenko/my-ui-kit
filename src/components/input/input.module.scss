@@ -1,7 +1,10 @@
-.wrapper {
+.container {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   row-gap: 8px;
+
   font-family: inherit;
 
   .label {
@@ -19,6 +22,8 @@
 
     background-color: $bg-default;
     outline: none;
+
+    transition: 0.3s;
 
     &::placeholder {
       color: $color-placeholder;
@@ -90,6 +95,41 @@
     }
   }
 
+  .button {
+    position: relative;
+
+    width: fit-content;
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    border: none;
+    border: 1px solid black;
+    border-radius: 50%;
+
+    background-color: transparent;
+    outline: none;
+
+    &:hover {
+      background-color: $bg-hover;
+    }
+
+    &:active {
+      border: 1px solid $border-focus;
+    }
+
+    &:focus-visible {
+      border: 1px solid $border-focus;
+      outline: none;
+    }
+
+    > svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
   .error {
     font-weight: 400;
     color: $border-error;
@@ -117,5 +157,20 @@
 
   &:has(.input.large) .error {
     font-size: 16px;
+  }
+
+  &:has(.input.input__error) .input {
+    border: 1px solid $border-error;
+    background-color: $bg-default;
+  }
+
+  &:has(.input.borderless.input__error) .input {
+    border: none;
+    background-color: $bg-error;
+  }
+
+  &:has(.input.underlined.input__error) .input {
+    border: none;
+    border-bottom: 1px solid $border-error;
   }
 }

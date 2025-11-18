@@ -8,5 +8,6 @@ export default {
   plugins: ["stylelint-order", "stylelint-scss"],
   rules: {
     "declaration-no-important": true,
+    "selector-class-pattern": null,
   },
 };

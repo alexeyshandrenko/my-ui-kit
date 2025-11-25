@@ -11,41 +11,39 @@
     width: fit-content;
     font-weight: 400;
     color: $color-text;
+
+    &_disabled {
+      color: $color-disabled;
+    }
   }
 
-  .input {
-    padding: 4px 10px;
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
     border: none;
     border-radius: 6px;
-
-    color: $color-text;
 
     background-color: $bg-default;
     outline: none;
 
-    transition: 0.3s;
-
-    &::placeholder {
-      color: $color-placeholder;
-    }
-
-    &:disabled {
-      color: $color-disabled;
-      background-color: $bg-disabled;
-    }
-
     &.large {
       height: 40px;
+      padding: 7px 11px;
       font-size: 16px;
     }
 
     &.default {
       height: 32px;
+      padding: 4px 11px;
       font-size: 14px;
     }
 
     &.small {
       height: 24px;
+      padding: 0 7px;
       font-size: 12px;
     }
 
@@ -56,14 +54,81 @@
         border: 1px solid $border-hover;
       }
 
-      &:focus,
-      &:focus-visible {
+      &:has(.input:focus),
+      &:has(.input:focus-visible) {
         border: 1px solid $border-focus;
+      }
+
+      &.error {
+        border: 1px solid $border-error;
+
+        &:hover {
+          border: 1px solid $border-error-hover;
+        }
+
+        &:has(.input:focus),
+        &:has(.input:focus-visible) {
+          border: 1px solid $border-error;
+        }
+      }
+
+      &.disabled {
+        pointer-events: none;
+        border: 1px solid $border-disabled;
+        background-color: $bg-disabled;
+      }
+    }
+
+    &.filled {
+      background-color: $bg-filled-input;
+
+      &:hover {
+        background-color: $bg-filled-input-hover;
+      }
+
+      &:has(.input:focus),
+      &:has(.input:focus-visible) {
+        border: 1px solid $border-focus;
+        background-color: $bg-default;
+      }
+
+      &.error {
+        border: 1px solid $border-error;
+        background-color: $bg-error;
+
+        &:hover {
+          border: 1px solid $border-error-hover;
+          background-color: $bg-error-hover;
+        }
+
+        &:has(.input:focus),
+        &:has(.input:focus-visible) {
+          border: 1px solid $border-error;
+          background-color: $bg-default;
+        }
+      }
+
+      &.disabled {
+        pointer-events: none;
+        background-color: $bg-disabled;
       }
     }
 
     &.borderless {
       border: none;
+
+      &.error {
+        background-color: $bg-error;
+
+        &:hover {
+          background-color: $bg-error-hover;
+        }
+      }
+
+      &.disabled {
+        pointer-events: none;
+        background-color: $bg-disabled;
+      }
     }
 
     &.underlined {
@@ -74,103 +139,73 @@
         border-bottom: 1px solid $border-hover;
       }
 
-      &:focus,
-      &:focus-visible {
+      &:has(.input:focus),
+      &:has(.input:focus-visible) {
         border-bottom: 1px solid $border-focus;
       }
-    }
 
-    &.filled {
-      background-color: $input-filled-bg;
+      &.error {
+        border-bottom: 1px solid $border-error;
 
-      &:hover {
-        background-color: $input-filled-bg-hover;
+        &:hover {
+          border-bottom: 1px solid $border-error-hover;
+        }
+
+        &:has(.input:focus),
+        &:has(.input:focus-visible) {
+          border-bottom: 1px solid $border-error;
+        }
       }
 
-      &:focus,
-      &:focus-visible {
-        border: 1px solid $border-focus;
-        background-color: $bg-default;
+      &.disabled {
+        border-bottom: 1px solid $border-disabled;
       }
     }
-  }
 
-  .button {
-    position: relative;
+    .input {
+      flex: 1;
 
-    width: fit-content;
-    width: 28px;
-    height: 28px;
-    padding: 4px;
-    border: none;
-    border: 1px solid black;
-    border-radius: 50%;
+      height: 100%;
+      padding: 0;
+      border: none;
 
-    background-color: transparent;
-    outline: none;
+      font-size: inherit;
+      line-height: 1;
+      color: $color-text;
 
-    &:hover {
-      background-color: $bg-hover;
-    }
-
-    &:active {
-      border: 1px solid $border-focus;
-    }
-
-    &:focus-visible {
-      border: 1px solid $border-focus;
+      background-color: inherit;
       outline: none;
-    }
 
-    > svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      &::placeholder {
+        color: $color-placeholder;
+      }
+
+      &:disabled {
+        color: $color-disabled;
+      }
     }
   }
 
-  .error {
+  .text {
     font-weight: 400;
-    color: $border-error;
+
+    &_error {
+      color: $color-error;
+    }
   }
 
-  &:has(.input.small) .label {
+  &:has(.wrapper.small) .label,
+  &:has(.wrapper.small) .text_error {
     font-size: 12px;
   }
 
-  &:has(.input.default) .label {
+  &:has(.wrapper.default) .label,
+  &:has(.wrapper.default) .text_error {
     font-size: 14px;
   }
 
-  &:has(.input.large) .label {
+  &:has(.wrapper.large) .label,
+  &:has(.wrapper.large) .text_error {
     font-size: 16px;
-  }
-
-  &:has(.input.small) .error {
-    font-size: 12px;
-  }
-
-  &:has(.input.default) .error {
-    font-size: 14px;
-  }
-
-  &:has(.input.large) .error {
-    font-size: 16px;
-  }
-
-  &:has(.input.input__error) .input {
-    border: 1px solid $border-error;
-    background-color: $bg-default;
-  }
-
-  &:has(.input.borderless.input__error) .input {
-    border: none;
-    background-color: $bg-error;
-  }
-
-  &:has(.input.underlined.input__error) .input {
-    border: none;
-    border-bottom: 1px solid $border-error;
   }
 }

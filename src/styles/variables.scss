@@ -1,20 +1,23 @@
-// Текст
+// Text
 $color-text: #0a0a0a;
 $color-placeholder: #a3a3a3;
 $color-disabled: #9ca3af;
 $color-error: #ef4444;
 
-// Фон
+// Background
 $bg-default: #fff;
-$input-filled-bg: #f9fafb; // light gray background for filled input
-$input-filled-bg-hover: #f3f4f6;
+$bg-filled-input: #f9fafb;
 $bg-hover: #fafafa;
 $bg-focus: #fff;
 $bg-disabled: #f3f4f6;
 $bg-error: #fceded;
+$bg-error-hover: #f7d7d7;
+$bg-filled-input-hover: #f3f4f6;
 
-// Границы
+// Border
 $border-color: #d1d5db;
 $border-hover: #9ca3af;
+$border-disabled: #d0d1d2;
 $border-focus: #279af1;
 $border-error: #ef4444;
+$border-error-hover: #f59a9a;

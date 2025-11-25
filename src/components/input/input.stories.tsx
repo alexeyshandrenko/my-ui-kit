@@ -50,7 +50,9 @@ export const Password: Story = {
     label: 'Password',
     placeholder: 'Password',
     variant: 'outlined',
-    error: 'Error',
-    type: 'password',
+    type: 'text',
+    size: 'default',
+    error: 'gr',
+    disabled: true,
   },
 };

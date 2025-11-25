@@ -1,26 +1,9 @@
-import EyeIcon from '@/assets/icons/eye.svg?react';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
-import { useId, useState, type FC, type InputHTMLAttributes } from 'react';
+import { useId, useRef, type FC } from 'react';
 import styles from './input.module.scss';
-
-type InputHTML = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'>;
-
-interface ClassNames {
-  containerClassName?: string;
-  labelClassName?: string;
-  inputClassName?: string;
-  errorClassName?: string;
-}
-
-interface InputProperties extends InputHTML {
-  label?: string;
-  error?: string;
-  size?: 'large' | 'default' | 'small';
-  variant?: 'outlined' | 'filled' | 'borderless' | 'underlined';
-  type?: 'text' | 'password';
-  classNames?: ClassNames;
-}
+import type { InputProperties } from './model/types';
+import { motionError } from './utils/motion';
 
 export const Input: FC<InputProperties> = ({
   size = 'default',
@@ -32,41 +15,52 @@ export const Input: FC<InputProperties> = ({
   ...properties
 }) => {
   const inputId = useId();
-  const [value, setValue] = useState('');
+  const inputReference = useRef<HTMLInputElement>(null);
 
   return (
     <div className={clsx(styles.container, classNames?.containerClassName)}>
       {label && (
         <label
-          className={clsx(styles.label, classNames?.labelClassName)}
+          className={clsx(
+            styles.label,
+            { [styles.label_disabled]: properties.disabled },
+            classNames?.labelClassName
+          )}
           htmlFor={inputId}
         >
           {label}
         </label>
       )}
-      <input
-        id={inputId}
+      <div
+        onClick={() => inputReference.current?.focus()}
         className={clsx(
-          styles.input,
+          styles.wrapper,
           styles[size],
           styles[variant],
-          { [styles.input__error]: value },
-          classNames?.inputClassName
+          {
+            [styles.error]: error,
+            [styles.disabled]: properties.disabled,
+          },
+          classNames?.wrapperClassName
         )}
-        {...properties}
-        type={type}
-        onChange={(event) => setValue(event.target.value)}
-      />
-      <button className={styles.button}>
-        <EyeIcon />
-      </button>
+      >
+        <input
+          ref={inputReference}
+          id={inputId}
+          className={clsx(styles.input, classNames?.inputClassName)}
+          type={type}
+          {...properties}
+        />
+      </div>
       <AnimatePresence>
-        {value && (
+        {error && (
           <motion.p
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className={clsx(styles.error, classNames?.errorClassName)}
+            {...motionError}
+            className={clsx(
+              styles.text,
+              styles.text_error,
+              classNames?.errorClassName
+            )}
           >
             {error}
           </motion.p>
@@ -77,4 +71,9 @@ export const Input: FC<InputProperties> = ({
 };
 
 //TODO
-// 1. проработать все type input
+// 3. добавить кнопку
+{
+  /* <button className={styles.button}>
+        <EyeIcon />
+      </button> */
+}
